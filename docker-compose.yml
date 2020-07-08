@@ -2,16 +2,23 @@ version: "2"
 services:
     redis:
         image: redis
+        network:
+            - back-end
     db:
         image: postgres:9.4
         environment:
             - POSTGRES_HOST_AUTH_METHOD=trust
+        network:
+            - back-end    
     vote:
         image: prahaskattimani/vote-app
         ports:
             - 5000:80
         depends_on:
             - redis
+        network:
+            - back-end
+            - front-end    
     results:
         image: prahaskattimani/result-app
         ports:
@@ -19,8 +26,17 @@ services:
         depends_on:
             - redis
             - db
+        network:
+            - back-end
+            - front-end     
     worker:
         image: prahaskattimani/worker-app
         depends_on:
             - redis
             - db
+        network:
+            - back-end
+            - front-end     
+network:
+    front-end:
+    back-end:
