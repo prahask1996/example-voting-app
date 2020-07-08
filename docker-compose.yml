@@ -8,17 +8,17 @@ vote:
     image: prahaskattimani/vote-app
     ports:
         - 5000:80
-    link:
+    links:
         - redis:redis
 results:
     image: prahaskattimani/result-app
     ports:
         - 5001:80
-    link:
+    links:
         - redis:redis
         - db:db
 worker:
     image: prahaskattimani/worker-app
-    link:
+    links:
         - redis:redis
         - db:db
