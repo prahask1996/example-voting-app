@@ -5,20 +5,20 @@ db:
     environment:
         - POSTGRES_HOST_AUTH_METHOD=trust
 vote:
-    image: prahaskattimani/vote-app
+    build: ./vote
     ports:
         - 5000:80
     links:
         - redis:redis
 results:
-    image: prahaskattimani/result-app
+    build: ./results
     ports:
         - 5001:80
     links:
         - redis:redis
         - db:db
 worker:
-    image: prahaskattimani/worker-app
+    duild: ./worker
     links:
         - redis:redis
         - db:db
