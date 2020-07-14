@@ -1,9 +1,11 @@
+apiversion: v1
 kind: Pod
 metadata:
-  name: postgres
+  name: worker-app-pod
   labels:
-    tier: db-tier
+    name: worker-app-pod
+    app: example-voting-app
 spec:
   containers:
-    - name: postgres
-      image: postgres
+    - name: worker-app
+      image: prahaskattimani/worker-app
