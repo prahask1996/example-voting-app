@@ -4,8 +4,10 @@ metadata:
   name: voting-app-pod
   labels:
     name: voting-app-pod
-    app: 
+    app: example-voting-app
 spec:
   containers:
-    - name: voting
-      image: voting
+    - name: voting-app
+      image: prahaskattimani/vote-app
+      ports:
+      - containerPort: 80
