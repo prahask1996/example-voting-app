@@ -1,9 +1,16 @@
+apiVersion: v1
 kind: Pod
 metadata:
-  name: postgres
+  name: postgres-pod
   labels:
-    tier: db-tier
+    name: postgres-pod
+    app: example-voting-app
 spec:
   containers:
     - name: postgres
-      image: postgres
+      image: postgres:9.4
+      env:
+      - name:POSTGRES_HOST_AUTH_METHOD
+        value: trust
+      ports:
+       - containerPort: 5432
