@@ -12,7 +12,7 @@ pipeline {
 				                powershell 'mvn -f worker/pom.xml clean install'
 		              	}
 		}
-		stage('build vote"){
+		stage('build vote'){
 			steps{
 				powershell 'python --version'
 				powershell 'pip install'
