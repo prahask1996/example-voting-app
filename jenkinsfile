@@ -17,7 +17,7 @@ pipeline {
 		                    withSonarQubeEnv(installationName: 'sonarqube', credentialsId: '01d00282-f294-4187-bc24-74e0b702a5d2') {
                         echo 'entered the Sonar steps'
 		                    powershell 'cd worker'
-		                    powershell 'mvn clean install package sonar:sonar'
+		                    powershell 'mvn -f worker/pom.xml clean install package sonar:sonar'
                         }
 		                }
 	          }
