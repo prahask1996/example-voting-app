@@ -1,0 +1,24 @@
+pipeline {
+        agent any
+        stages {
+              stage('build'){
+                    tools{
+                        jdk 'jdk8'
+                        maven 'apache-maven-3.6.3'
+                    }
+                    steps {
+				                powershell 'java -version'
+				                powershell 'mvn -version'
+				                powershell 'mvn clean install'
+		              	}
+             stage('SonarQube Analysis') {
+		                steps {
+		                    withSonarQubeEnv(installationName: 'sonarqube', credentialsId: '01d00282-f294-4187-bc24-74e0b702a5d2') {
+                        echo 'entered the Sonar steps'
+		                    powershell 'cd happytrip-code'
+		                    powershell 'mvn clean install package sonar:sonar'
+                        }
+		                }
+	          }
+        }
+}        
