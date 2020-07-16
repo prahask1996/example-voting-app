@@ -12,6 +12,12 @@ pipeline {
 				                powershell 'mvn -f worker/pom.xml clean install'
 		              	}
 		}
+		stage('build vote"){
+			steps{
+				powershell 'python --version'
+				powershell 'pip install'
+			}
+		}
              stage('SonarQube Analysis') {
 		                steps {
 		                    withSonarQubeEnv(installationName: 'sonarqube', credentialsId: '01d00282-f294-4187-bc24-74e0b702a5d2') {
