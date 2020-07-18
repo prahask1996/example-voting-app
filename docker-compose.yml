@@ -11,7 +11,7 @@ services:
         networks:
             - back-end    
     vote:
-        image: prahaskattimani/vote-app
+        image: prahaskattimani/vote-app:votingapp
         ports:
             - 5000:80
         depends_on:
@@ -20,7 +20,7 @@ services:
             - back-end
             - front-end    
     results:
-        image: prahaskattimani/result-app
+        image: prahaskattimani/result-app:votingapp
         ports:
             - 5001:80
         depends_on:
@@ -30,7 +30,7 @@ services:
             - back-end
             - front-end     
     worker:
-        image: prahaskattimani/worker-app
+        image: prahaskattimani/worker-app:votingapp
         depends_on:
             - redis
             - db
