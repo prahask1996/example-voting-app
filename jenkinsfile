@@ -15,7 +15,7 @@ pipeline {
 		stage('build vote'){
 			steps{
 				powershell 'python --version'
-				powershell 'pip install'
+				powershell 'pip3 install'
 			}
 		}
              stage('SonarQube Analysis') {
@@ -30,7 +30,8 @@ pipeline {
 	      stage('SonarQube Analysis-1'){
 	      		 steps {
 		                    withSonarQubeEnv(installationName: 'sonarqube', credentialsId: '01d00282-f294-4187-bc24-74e0b702a5d2') {
-                        echo 'entered the Sonar steps'		                  
+                        echo 'entered the Sonar steps'	
+				    powershell 'cd ..'
 				    powershell 'cd vote'
 				    powershell 'python app.py sonar:sonar'
                         	    }
