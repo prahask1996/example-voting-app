@@ -1,42 +1,24 @@
-version: "2"
-services:
-    redis:
-        image: redis
-        networks:
-            - back-end
-    db:
-        image: postgres:9.4
-        environment:
-            - POSTGRES_HOST_AUTH_METHOD=trust
-        networks:
-            - back-end    
-    vote:
-        image: prahaskattimani/vote-app:votingapp
-        ports:
-            - 5000:80
-        depends_on:
-            - redis
-        networks:
-            - back-end
-            - front-end    
-    results:
-        image: prahaskattimani/result-app:votingapp
-        ports:
-            - 5001:80
-        depends_on:
-            - redis
-            - db
-        networks:
-            - back-end
-            - front-end     
-    worker:
-        image: prahaskattimani/worker-app:votingapp
-        depends_on:
-            - redis
-            - db
-        networks:
-            - back-end
-            - front-end     
-networks:
-    front-end:
-    back-end:
+redis:
+    image: redis
+db:
+    image: postgres:9.4
+    envirnment:
+      - POSTGRES_HOST_AUTH_METHOD=trust
+vote:
+    image: prahaskattimani/vote-app:votingapp
+    ports:
+       - 5000:80
+    link:
+       - redis:redis
+result:
+    image: prahaskattimani/result-app:votingapp
+    ports:
+       - 5001:80
+    link:
+       - redis:redis
+       - db:db
+worker:
+    image: prahaskattimani/worker-app:votingapp
+    link:
+       - redis:redis
+       - db:db
